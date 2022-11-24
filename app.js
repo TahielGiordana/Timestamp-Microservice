@@ -15,15 +15,20 @@ app.get("/", (req, res) => {
 //Get the unix
 app.get("/api/:date?", (req, res) => {
   let date;
-  if (isNaN(parseInt(req.params.date))) {
-    date = new Date(req.params.date);
+  if (req.params.date === undefined) {
+    date = new Date();
+    res.send({ unix: date.valueOf(), utc: date.toUTCString() });
   } else {
-    date = new Date(parseInt(req.params.date));
-  }
-  if (date.toString() === "Invalid Date") {
-    res.send({ error: "Invalid Date" });
-  } else {
-    res.send({ unix: date.valueOf(date), utc: date.toUTCString() });
+    if (isNaN(parseInt(req.params.date))) {
+      date = new Date(req.params.date);
+    } else {
+      date = new Date(parseInt(req.params.date));
+    }
+    if (date.toString() === "Invalid Date") {
+      res.send({ error: "Invalid Date" });
+    } else {
+      res.send({ unix: date.valueOf(date), utc: date.toUTCString() });
+    }
   }
 });
 
