@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 //Get the unix
-app.get("/:date", (req, res) => {
+app.get("/api/:date?", (req, res) => {
   let date;
   if (isNaN(parseInt(req.params.date))) {
     date = new Date(req.params.date);
