@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 //Get the unix
 app.get("/api/:date?", (req, res) => {
   let date;
-  if (req.params.date === undefined) {
+  if (req.params.date === "") {
     date = new Date();
     res.send({ unix: date.valueOf(), utc: date.toUTCString() });
   } else {
